@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=bundle_config_schema.json
+bundle:
+  name: dlt-wikipedia
+
+resources:
+  pipelines:
+    dlt-wikipedia-pipeline:
+      name: dlt-wikipedia-pipeline
+      development: true
+      continuous: false
+      channel: "CURRENT"
+      photon: false
+      libraries:
+        - file:
+            path: ./dlt-wikipedia-python.py
+      edition: "ADVANCED"
+      clusters:
+        - label: "default"
+          num_workers: 1
+
+targets:
+  development:
+    workspace:
+      host: https://e2-demo-field-eng.cloud.databricks.com/?o=1444828305810485#
