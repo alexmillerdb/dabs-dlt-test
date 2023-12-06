@@ -2,23 +2,36 @@
 bundle:
   name: dlt-wikipedia
 
-resources:
-  pipelines:
-    dlt-wikipedia-pipeline:
-      name: dlt-wikipedia-pipeline
-      development: true
-      continuous: false
-      channel: "CURRENT"
-      photon: false
-      libraries:
-        - file:
-            path: ./dlt-wikipedia-python.py
-      edition: "ADVANCED"
-      clusters:
-        - label: "default"
-          num_workers: 1
+include:
+  - resources/*.yml
+
+# resources:
+#   pipelines:
+#     dlt-wikipedia-pipeline:
+#       name: dlt-wikipedia-pipeline
+#       development: true
+#       continuous: false
+#       channel: "CURRENT"
+#       photon: false
+#       libraries:
+#         - file:
+#             path: ./dlt-wikipedia-python.py
+#       edition: "ADVANCED"
+#       clusters:
+#         - label: "default"
+#           num_workers: 1
 
 targets:
-  development:
+  dev:
+    mode: development
+    default: true
     workspace:
       host: https://e2-demo-field-eng.cloud.databricks.com/?o=1444828305810485#
+
+  prod:
+    mode: production
+    workspace:
+      host: https://e2-demo-field-eng.cloud.databricks.com/?o=1444828305810485#
+      root_path: /Shared/.bundle/prod/${bundle.name}
+    run_as:
+      user_name: alex.miller@databricks.com
