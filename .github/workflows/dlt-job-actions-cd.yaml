@@ -21,7 +21,7 @@ jobs:
         - name: Deploy Bundle to prod
           run: databricks bundle deploy -t prod
         - name: Run Bundle in prod
-          run: databricks bundle run -t prod prod-dlt-wikipedia-pipeline --refresh-all
+          run: databricks bundle run -t prod dlt-wikipedia-pipeline --refresh-all
           env:
               DATABRICKS_TOKEN: ${{ secrets.PROD_SP_TOKEN }}
               DATABRICKS_BUNDLE_ENV: prod
